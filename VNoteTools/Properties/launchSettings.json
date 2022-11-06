@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "VNoteTools": {
+      "commandName": "Project",
+      "commandLineArgs": "\"D:\\WorkArea\\Private_Project\\PaddleOCR-Arm\\License_Plate_Recognition\\README.md\""
+    }
+  }
+}
