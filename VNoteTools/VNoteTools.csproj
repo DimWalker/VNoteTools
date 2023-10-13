@@ -7,4 +7,27 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="PowerArgs" Version="4.0.3" />
+    <PackageReference Include="RestSharp" Version="110.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="dotnet-cnblogs.v1.4.2.win-x86\clrcompression.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="dotnet-cnblogs.v1.4.2.win-x86\clrjit.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="dotnet-cnblogs.v1.4.2.win-x86\coreclr.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="dotnet-cnblogs.v1.4.2.win-x86\dotnet-cnblog.exe">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="dotnet-cnblogs.v1.4.2.win-x86\mscordaccore.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

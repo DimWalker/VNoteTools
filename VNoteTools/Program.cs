@@ -2,23 +2,84 @@
 //Console.WriteLine("Hello, World!");
 
 #region 格式化
+using PowerArgs;
 using System.Diagnostics;
 using VNoteTools.Code;
 
-void FormatMd()
+void FormatMd(CmdArgs cmdArgs)
 {
-    if (args.Length == 0)
+    string mdPath = cmdArgs.InputMdPath;
+    if (string.IsNullOrEmpty(mdPath))
     {
-        Console.WriteLine("Please input the md path.");
-        return;
+        Console.WriteLine("Please input InputMdPath:");
+        mdPath = Console.ReadLine();
+        if (!File.Exists(mdPath))
+        {
+            Console.WriteLine("InputMdPath file not exists.");
+            return;
+        }
     }
-    string mdPath = args[0];
-    string fileName = "test.md";
-    if (args.Length > 1) fileName = args[1];
+
+    FileInfo fileInfo = new FileInfo(mdPath);
+    string fileName = fileInfo.Name.Substring(0, fileInfo.Name.Length - fileInfo.Extension.Length) + "_Formatted.md";
+    fileName = Path.Combine(fileInfo.DirectoryName, fileName);
+    //if (args.Length > 1) fileName = args[1];
     MdFormatter.Format(mdPath, fileName);
+    Console.WriteLine("New Md File Saved: " + fileName);
+    FileHelper.OpenInExplorer(fileName);
+}
+void NugetMd(CmdArgs cmdArgs)
+{
+    string mdPath = cmdArgs.InputMdPath;
+    string github_image_prefix_url = cmdArgs.github_image_prefix_url;
+    if (string.IsNullOrEmpty(mdPath))
+    {
+        Console.WriteLine("Please input InputMdPath:");
+        mdPath = Console.ReadLine();
+        if (!File.Exists(mdPath))
+        {
+            Console.WriteLine("InputMdPath not exists.");
+            return;
+        }
+    }
+    if (string.IsNullOrEmpty(github_image_prefix_url))
+    {
+        Console.WriteLine("Please input github_image_prefix_url:");
+        github_image_prefix_url = Console.ReadLine();
+        if (string.IsNullOrEmpty(github_image_prefix_url))
+        {
+            Console.WriteLine("github_image_prefix_url can't be empty.");
+            return;
+        }
+    }
+    if (!github_image_prefix_url.EndsWith("/"))
+        github_image_prefix_url += "/";
+
+    FileInfo fileInfo = new FileInfo(mdPath);
+    string fileName = fileInfo.Name.Substring(0, fileInfo.Name.Length - fileInfo.Extension.Length) + "_Nuget.md";
+    fileName = Path.Combine(fileInfo.DirectoryName, fileName);
+    //if (args.Length > 1) fileName = args[1];
+    NugetMdTools.Format(mdPath, fileName, github_image_prefix_url);
+    Console.WriteLine("New Md File Saved: " + fileName);
     FileHelper.OpenInExplorer(fileName);
 }
 
+void CnBlogsMd(CmdArgs cmdArgs)
+{
+    CnblogsMdTools.Download();
+    string mdPath = cmdArgs.InputMdPath;
+    if (string.IsNullOrEmpty(mdPath))
+    {
+        Console.WriteLine("Please input InputMdPath:");
+        mdPath = Console.ReadLine();
+        if (!File.Exists(mdPath))
+        {
+            Console.WriteLine("InputMdPath not exists.");
+            return;
+        }
+    }
+    CnblogsMdTools.NewCmd(mdPath);
+}
 #endregion
 
 #region 地平线
@@ -33,8 +94,28 @@ void HorizonFormate()
 #endregion
 
 
+
+
+var parsed = Args.Parse<CmdArgs>(args);
+
 #region 测试
-FormatMd();
+
+switch (parsed.Method)
+{
+    case "FormatMd":
+        FormatMd(parsed);
+        break;
+    case "NugetMd":
+        NugetMd(parsed);
+        break;
+    case "CnBlogsMd":
+        CnBlogsMd(parsed);
+        break;
+
+    default:
+        Console.WriteLine("No This Method.");
+        break;
+}
 //HorizonFormate();
 
 #endregion
