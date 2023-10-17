@@ -1,8 +1,7 @@
 {
   "profiles": {
     "VNoteTools": {
-      "commandName": "Project",
-      "commandLineArgs": "-InputMdPath \"F:\\Project_Private\\Wlkr.Core.SDK\\Wlkr.Core.Logger\\README.md\" -github_image_prefix_url \"https://raw.githubusercontent.com/DimWalker/Wlkr.Core.Logger/master/vx_images/\""
+      "commandName": "Project"
     }
   }
 }

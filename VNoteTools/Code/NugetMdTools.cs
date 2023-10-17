@@ -10,7 +10,7 @@ namespace VNoteTools.Code
     internal class NugetMdTools
     {
         /// <summary>
-        /// 将 "vx_images/" 替换为 "https://raw.githubusercontent.com/acc/repo/branch/vx_images/"
+        /// 将 "vx_images/" 替换为 "https://raw.githubusercontent.com/{acc}/{repo}/{branch}/vx_images/"
         /// </summary>
         /// <param name="mdPath"></param>
         /// <param name="savePath"></param>

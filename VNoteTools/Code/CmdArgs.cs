@@ -14,11 +14,7 @@ namespace VNoteTools.Code
         // be prompted.
         //[ArgRequired(PromptIfMissing = true)]
         public string InputMdPath { get; set; }
-
-        [ArgRequired(PromptIfMissing = true)]
         public string Method { get; set; }
-
-
         public string github_image_prefix_url { get; set; }
     }
 }

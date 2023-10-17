@@ -44,7 +44,7 @@ void NugetMd(CmdArgs cmdArgs)
     }
     if (string.IsNullOrEmpty(github_image_prefix_url))
     {
-        Console.WriteLine("Please input github_image_prefix_url:");
+        Console.WriteLine("Please input github_image_prefix_url:\r\nEtc: https://raw.githubusercontent.com/{acc}/{repo}/{branch}/vx_images/");
         github_image_prefix_url = Console.ReadLine();
         if (string.IsNullOrEmpty(github_image_prefix_url))
         {
@@ -97,8 +97,17 @@ void HorizonFormate()
 
 
 var parsed = Args.Parse<CmdArgs>(args);
+if (string.IsNullOrEmpty(parsed.Method))
+{
+    Console.WriteLine("Please Input Method, Suppor Keyword: FormatMd, NugetMd, CnBlogsMd.");
+    parsed.Method = Console.ReadLine();
+}
 
 #region 测试
+
+/*
+ * -InputMdPath "F:\Project_Private\Wlkr.Core.SDK\Wlkr.Core.Logger\README.md" -github_image_prefix_url "https://raw.githubusercontent.com/DimWalker/Wlkr.Core.Logger/master/vx_images/"
+ */
 
 switch (parsed.Method)
 {
@@ -113,7 +122,7 @@ switch (parsed.Method)
         break;
 
     default:
-        Console.WriteLine("No This Method.");
+        Console.WriteLine("Not Support Method.");
         break;
 }
 //HorizonFormate();
